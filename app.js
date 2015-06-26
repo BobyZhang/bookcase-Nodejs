@@ -289,6 +289,8 @@ app.post('/wunderlist/edit', function (req, res) {
         }
     );*/
 });
+
+// for test
 app.get('/wunderlist/get', function (req, res) {
     var page = req.query.page;
     var sort = req.query.sort;
