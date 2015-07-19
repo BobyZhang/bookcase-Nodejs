@@ -131,7 +131,7 @@ function submitLoginReq() {
         } else {
             console.log(username);
             CookieUtil.set('identify', username);
-            location.href = '/wunderlist.html';
+            location.href = '/borrow.html';
         }
     });
 }

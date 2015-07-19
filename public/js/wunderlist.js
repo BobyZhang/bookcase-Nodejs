@@ -15,6 +15,8 @@ function AddWunderBook() {
 inheritPrototype(AddWunderBook, Book);
 
 AddWunderBook.prototype.showList = function () {
+    
+    
     // basic inf show
     this.show();
     var objBook = this;
@@ -161,11 +163,11 @@ function submitWunder(_objBook) {
 }
 
 //
-// vote to some boos
+// vote to some books
 //
 function submitVote(objBook) {
 
-    var url = '/wunderlist/vote?isbn=' + objBook.bookInf.isbn;
+    var url = '/wunderlist/vote?isbn=' + objBook.bookInf.isbn + '&voter=' + CookieUtil.get('identify');
 
     $.ajax({
         url: url,
@@ -173,7 +175,8 @@ function submitVote(objBook) {
         async: true
     })
     .done(function (resData) {
-        var res = resData;
+        
+        var res = JSON.parse(resData);
 
         // if something wrong
         if (res.errcode && res.errcode == 1) {
@@ -284,6 +287,9 @@ function submitWunderlistAdd(_isbn) {
     })
     .done(function (resData) {
         document.getElementById('searching-tip').style.display = 'none';
+        //clean chidren
+        cleanAllChilden($('#show-block'));
+        console.log(resData);
         showList(resData);
     });
 }
@@ -295,7 +301,7 @@ function submitWunderlistAdd(_isbn) {
 function getWunderlist(turnedPage, sort) {
     // send wunderlist require
     var url = '/wunderlist/get?' + 'page=' + turnedPage
-        + '&' + 'sort=' + sort;
+        + '&sort=' + sort + '&maxNumber=' + 8;
 
     $.ajax({
         url: url,
@@ -306,7 +312,7 @@ function getWunderlist(turnedPage, sort) {
         // TODO: why
         var res = JSON.parse(resData);
         showList(res);
-    })
+    });
 }
 
 
@@ -318,7 +324,7 @@ function listenTurnOpetation(_sortWay) {
     // clean page
     cleanAllChilden($('#wunder-list')); 
     // get the first page of wunderlist
-    getWunderlist(1, _sortWay);
+    getWunderlist(currPage, _sortWay);
     // uppdate
     updatePages();
 
@@ -326,7 +332,7 @@ function listenTurnOpetation(_sortWay) {
     var nextPage = $('#wunderlist-content .next-page');
     nextPage.click(function () {
         if (currPage == allPages) {
-            alert('This is the last page!');
+            //alert('This is the last page!');
             return;
         }
         cleanAllChilden($('#wunder-list')); // clean page
@@ -338,7 +344,7 @@ function listenTurnOpetation(_sortWay) {
     var prePage = $('#wunderlist-content .pre-page');
     prePage.click(function () {
         if (currPage == 1) {
-            alert('This is the first page!');
+            //alert('This is the first page!');
             return;
         }
         cleanAllChilden($('#wunder-list')); // clean page
@@ -363,7 +369,6 @@ function listenTurnOpetation(_sortWay) {
         getWunderlist(currPage, _sortWay);
         updatePages();
     });
-    
 }
 
 //
@@ -382,7 +387,7 @@ function hadVoted(_objBook) {
 
     var voterLen = _objBook.voter.length;
     for (var i = 0; i < voterLen; ++i) {
-        if (currUserId == _objBook.voter[i].member_id) {
+        if (currUserId == _objBook.voter[i]._id) {
             return true;
         }
     }

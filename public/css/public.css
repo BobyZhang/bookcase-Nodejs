@@ -149,6 +149,7 @@ a {
     width: 930px;
     height: 964px;
     background-color: #fff;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
 #donate-content #title {
@@ -272,6 +273,7 @@ a {
     width: 930px;
     height: auto;
     background-color: #fff;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
 #wunderlist-page #title {
@@ -360,8 +362,7 @@ a {
 }
 
 #wunderlist-page .book-inf .details .isbn,
-#wunderlist-page .book-inf .details .get-more
- {
+#wunderlist-page .book-inf .details .get-more {
     display: none;
 }
 
@@ -619,10 +620,273 @@ a {
     display: none;
 }
 
+/***********************************************
+    work for wunderlist page
+************************************************/
+#borrow-page {
+    font-family: 'Microsoft JhengHei';
+    background-image: url('/imgs/donate_bg.jpg');
+    background-size: 930px 523px;
+    margin: 0;
+}
 
+#borrow-content {
+    overflow: hidden;
+    display: block;
+    /*margin:0 calc((100% - 930px)/2) 30px;*/
+    margin: 0 auto;
+    width: 930px;
+    height: auto;
+    background-color: #fff;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
 
+#borrow-content .search-box {
+    width: 170px;
+    height: 22px;
+    border: 1px solid #0086B5;
+    margin: 14px 0;
+    border-radius: 80px;
+    padding: 1px 0 1px 5px;
+    float: left;
+}
+#borrow-content .tips {
+    float: left;
+    margin: 17px 30px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #A0A0A0;
+    display: none;
+}
+#borrow-page #title {
+    background-image: url('/imgs/borrow-title.jpg');
+    width: 100%;
+    height: 381px;
 
+    float: left;
+}
 
+#borrow-page #search-block {
+    color: #A0A0A0;
+    height:50px;
+    width: 788px;
+    padding: 0 70px;
+    border-bottom: 1px solid #767779;
+
+    float: left;
+}
+
+#borrow-page a {
+    color: #A0A0A0;
+}
+
+#borrow-page #borrow-list {
+    width: 858px;
+    height: auto;
+    min-height: 237px;
+    /*max-height: 948px;*/  /* 237 * 4 */
+    padding: 0 35px;
+    float: left;
+    background-color: #fff;
+
+    overflow: hidden;
+}
+
+#borrow-page .book-inf {
+    width: 359px;
+    height: 201px;
+    float: left;
+    margin: 18px 35px;
+    color: #6D6D6D;
+}
+
+#borrow-page .book-inf .cover {
+    width: 135px;
+    height: 199px;
+    border: 1px solid #767779;
+    float: left;
+}
+
+#borrow-page .book-inf .details {
+    width: 202px;
+    height: 121px;
+    margin-left: 20px;
+    float: left;
+    font-size: 15px;
+}
+
+#borrow-page .book-inf .details .inf {
+    display: block;
+    height: 17px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+#borrow-page .book-inf .details .isbn {
+    display: none;
+}
+
+#borrow-page .book-inf .details .get-more {
+    margin-top: 16px;
+}
+#borrow-page .book-inf .submit-borrow {
+    width: 80px;
+    height: 27px;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    background-color: #0086B5;
+    margin: 53px 0 0 142px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/***********************************************
+    work for personal page
+************************************************/
+#personal-page {
+    font-family: 'Microsoft JhengHei';
+    background-image: url('/imgs/donate_bg.jpg');
+    margin: 0;
+}
+
+#personal-content {
+    overflow: hidden;
+    display: block;
+    /*margin:0 calc((100% - 930px)/2) 30px;*/
+    margin: 0 auto;
+    width: 930px;
+    height: auto;
+    min-height: 750px;
+    background-color: #fff;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+/********************************************
+    This part work for public-personal-nav
+********************************************/
+
+content #public-personal-nav {
+    position: relative;
+    /*left: 40px;
+    top: 40px;*/
+    margin: 40px 0 0 40px;
+    width: 150px;
+    height: auto;
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    font-family: 'Microsoft YaHei';
+    float: left;
+}
+
+#public-personal-nav #inf {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+#public-personal-nav #inf .headphoto {
+    width: 130px;
+    height: 130px;
+    margin: 10px 10px;
+}
+
+#public-personal-nav #inf .username {
+    display: block;
+    width: auto;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 auto 10px;
+    font-size: 18px;
+    text-align: center;
+}
+
+#public-personal-nav ul {
+    list-style: none;
+    margin: 0 0 80px;
+    padding: 0;
+}
+
+#public-personal-nav ul li {
+    width: 100%;
+    height: 56px;
+    display: block;
+    position: relative;
+}
+
+#public-personal-nav ul li a {
+    display: block;
+    position: absolute;
+    width: 104px;
+    height: 20px;
+    text-decoration: none;
+    color: #808080;
+    padding: 18px 23px;
+    font-size: 15px;
+}
+
+#public-personal-nav ul li:hover a {
+    color: #3f87eb;
+}
+
+#public-personal-nav ul li a span {
+    display: block;
+    width: auto;
+    height: 100%;
+    line-height: 20px;
+    letter-spacing: 8px;
+    text-align: right;
+}
+
+#public-personal-nav .my-borrowed {
+    padding: 18px 29px;
+    left: -6px;
+    background-color: #0086B5;
+    color: #ffffff !important;
+}
+
+#my-borrow-list {
+    position: relative;
+    /*left: 10px;*/
+    /*top: 40px;*/
+    margin: 40px 40px 0 10px;
+    width: 686px;
+    height: 600px;
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    font-family: 'Microsoft YaHei';
+    float: left;
+    
+}
+
+#my-borrow-list table {
+    /*border: 1px solid #6D6D6D;*/
+    margin: 30px 55px;
+    width: auto;
+    height: auto;
+    border-spacing: 0;
+}
+#my-borrow-list table tr {
+    margin: 10px 0;
+    height: 50px;
+    /*border: 1px solid #6D6D6D;*/
+}
+#my-borrow-list table th, td {
+    text-align: center;
+    width: 192px;
+    /*border: 1px solid #6D6D6D;*/
+}
+#my-borrow-list .submit-return {
+    width: 80px;
+    height: 27px;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    background-color: #0086B5;
+    /*margin: 53px 0 0 142px;*/
+    font-size: 13px;
+    cursor: pointer;
+}
 /*
     work for lotsize-donate.html
 */

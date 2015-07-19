@@ -46,10 +46,20 @@ Book.prototype.show = function () {
     $('.publisher', this.node).children(":last").html(this.bookInf.publisher);
     $('.publish-time', this.node).children(":last").html(this.bookInf.pub_date);
     $('.isbn', this.node).children(":last").html(this.bookInf.isbn);
+    
+    // this part for personal page
+    if (document.title == 'Continue-personal') {
+        $('.book-title', this.myBorrowNode).html(this.bookInf.title);
+        $('.borrow-time', this.myBorrowNode).html(this.bookInf.borrowTime.slice(0,10));
+        
+        $('.my-borrow-table').append(this.myBorrowNode);
+        console.log(this.myBorrowNode);
+    }
 
     document.title == 'Continue-wunderlist' && !boolAddWunder && $('#wunder-list').append(this.node);
     document.title == 'Continue-wunderlist' && boolAddWunder && $('#show-block').append(this.node);
     document.title == 'Continue-donate' && $('.show-block').append(this.node);
+    document.title == 'Continue-borrow' && $('#borrow-list').append(this.node);
 }
 
 // function
@@ -75,7 +85,6 @@ function wantListStr(_voter) {
 }
 
 function showList(res) {
-
     // if something wrong
     if (res.errcode && res.errcode == 1) {
         alert("Something wrong!");
@@ -88,6 +97,7 @@ function showList(res) {
     //    res = res.books;
     //}
     res = (res.books || res);
+    
     // the number of wunderlist
     var count = res.length;
     // if there is no book
@@ -100,19 +110,27 @@ function showList(res) {
     //var bookArray = [];
     
     for (var i = 0; i < count; ++i) {
+        
+        var temp; 
         // if this is for wunderlist part
         if (document.title == 'Continue-wunderlist' && boolAddWunder == false) {
-            var temp = new WunderBook();
-            temp.voteCount = res[i].vote_count;
+            temp = new WunderBook();
+            temp.voteCount = res[i].voteCount;
             temp.voter = res[i].voter;
         }
         // if this is for add wunderlist part
         else if ((document.title == 'Continue-wunderlist' && boolAddWunder == true)) {
-            var temp = new AddWunderBook();
+            temp = new AddWunderBook();
         }
-            //  if (document.title == 'Continue-donate')
-        else {
-            var temp = new DonateBook();
+        else if (document.title == 'Continue-borrow') {
+            temp = new BorrowBook();
+        }
+        //  // if this is for add donate part
+        else if (document.title == 'Continue-donate') {
+            temp = new DonateBook();
+        }
+        else if (document.title == 'Continue-personal') {
+            temp = new MyBorrowBook();
         }
         temp.bookInf.image = res[i].image;
         temp.bookInf.title = res[i].title;
@@ -122,15 +140,26 @@ function showList(res) {
         temp.bookInf.createTime = res[i].create_at || '';
         temp.bookInf.isbn = res[i].isbn13 || res[i].isbn;
 
+        //console.log(res[i]);
+        if (document.title == 'Continue-borrow') {
+            temp.bookInf.borrowed = res[i].borrowed;
+            temp.bookInf.book_id = res[i].id; // id = book_id
+        }
+        if (document.title == 'Continue-personal') {
+            temp.bookInf.borrowTime = res[i].borrow_time;
+            temp.bookInf.book_id = res[i].book_id; // id = book_id
+        }
         // TODO: author and tags is a array
-        typeof res[i].author == 'string'
-            && (temp.bookInf.author = JSON.parse(res[i].author));
+        //typeof res[i].author == 'string'
+        //    && (temp.bookInf.author = JSON.parse(res[i].author));
         typeof res[i].author == 'object'
             && (temp.bookInf.author = res[i].author);
+        typeof res[i].author == 'string'
+           && (temp.bookInf.author.push(res[i].author));
         // tags is a array
-        for (var j = 0; j < res[i].tags.length; ++j) {
-            temp.bookInf.tags[j] = res[i].tags[j].name;
-        }
+        //for (var j = 0; j < res[i].tags.length; ++j) {
+        //    temp.bookInf.tags[j] = res[i].tags[j].name;
+        //}
 
         // show
         temp.showList();
